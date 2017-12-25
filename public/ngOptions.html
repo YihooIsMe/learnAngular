@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>ng-options</title>
+    <script src="components/angular/angular.min.js"></script>
+    <script src="js/app.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body ng-controller="thirdCtrl">
+<label>选择一个颜色（无空选项）:
+    <select ng-model="colorChosen" ng-options="color.name group by color.type disable when color.disabled for color in colors">
+        <option value="">-- 选择一个颜色 --</option>
+    </select>
+</label>
+<br>
+当前选中的颜色:{{colorChosen.name}}
+<div style="border:solid 1px black; height:20px" ng-style="{'background-color':colorChosen.color}"></div>
+<label>选择一个国家（有空选项）:
+    <select ng-model="country" ng-options="k as v for (k, v) in countries">
+        <option value="">-- 选择一个国家 --</option>
+    </select>
+</label>
+<br>
+当前选中的国家: {{ country }}
+</body>
+</html>

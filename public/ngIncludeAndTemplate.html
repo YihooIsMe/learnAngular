@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ng-include and ng-template</title>
+    <script src="components/angular/angular.min.js"></script>
+    <script src="js/myapp.js"></script>
+    <style>
+        #common{
+            height: 150px;
+            background-color: greenyellow;
+        }
+    </style>
+</head>
+<body ng-app="myApp">
+<div ng-include="'commonHeader.html'"></div>
+<!--<div ng-include="'http://www.baidu.com/'"></div>-->
+<p>content</p>
+</body>
+</html>

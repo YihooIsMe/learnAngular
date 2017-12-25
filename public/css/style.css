@@ -23,3 +23,14 @@
 .orange {
     color: orange;
 }
+.base-class {
+    transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+}
+
+.base-class.animate {
+    color: red;
+    font-size:3em;
+}
+.mt{
+    margin-top: 50px;
+}
