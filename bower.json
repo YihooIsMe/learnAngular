@@ -1,0 +1,23 @@
+{
+  "name": "learning_angularjs",
+  "authors": [
+    "yihoo"
+  ],
+  "description": "angular",
+  "main": "",
+  "keywords": [
+    "AngularJS"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "1.4.6"
+  }
+}
