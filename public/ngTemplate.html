@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>ng-template</title>
+    <script src="components/angular/angular.min.js"></script>
+</head>
+<body ng-app="myApp">
+<div>
+    <div>I come from "templateURL"!</div>
+    <!-- 代码片段开始 -->
+    <script type="text/ng-template" id="part.html">
+        <h1>通过ng-template封装的part.html</h1>
+        <p>这里是part.html中的内容</p>
+    </script>
+    <!-- 代码片段结束 --></div>
+
+</body>
+</html>
+<script>
+    var myApp=angular.module("myApp",[]);
+    /*myApp.controller("myCtrl",function () {
+
+    })*/
+   /*
+    *
+    * *************************
+    * 这个代码有问题，执行不了 *
+    * ************************
+    *
+    */
+</script>

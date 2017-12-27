@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>templateUrl模板</title>
+    <script src="components/angular/angular.min.js"></script>
+</head>
+<body ng-app="myApp">
+<div>I come from "templateURL"!</div>
+<div ng-controller="myCtrl">
+    <div form-directive></div>
+</div>
+
+</body>
+</html>
+<script>
+    var myApp=angular.module("myApp",[]);
+    myApp.directive("formDirective",function () {
+        return {
+            restrict:"A",
+            // scope:{},/*这行可有可无的存在*/
+            templateUrl:"commonHeader.html"
+        }
+    });
+
+    myApp.controller("myCtrl",function () {
+
+    })
+</script>

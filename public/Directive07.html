@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>在Directive中link函数</title>
+    <script src="components/angular/angular.min.js"></script>
+</head>
+<body ng-app="myApp" ng-controller="myCtrl">
+    <div form-directive>
+        <p>这段文字是放置在Directive中间的。</p>
+    </div>
+</body>
+</html>
+<script>
+    var myApp=angular.module("myApp",[]);
+    myApp.directive("formDirective",function () {
+        return {
+            restrict:"A",
+            transclude:true,
+            template:"<h1>标题</h1><p>这里是段落文字</p><div ng-transclude></div>"
+        }
+    });
+
+    myApp.controller("myCtrl",function () {
+
+    })
+</script>

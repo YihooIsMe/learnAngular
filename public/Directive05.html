@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>在Directive中进行函数回调</title>
+    <script src="components/angular/angular.min.js"></script>
+</head>
+<body ng-app="myApp">
+<div ng-controller="myCtrl">
+    <div person-list btn-click="btnClickCallback(message)"></div>
+</div>
+
+</body>
+</html>
+<script>
+    /*
+     **********************
+     * 着重了解了解这种方式 *
+     * ********************
+     * */
+    var myApp=angular.module('myApp',[]);
+    myApp.directive('personList',function () {
+        return {
+            restrict:"A",
+            scope:{
+                btnClick:"&"
+            },
+            template:"<input type='text' ng-model='value'><input type='button' value='Click Me' ng-click='btnClick({message:value})'> "
+        }
+    });
+
+    myApp.controller("myCtrl",function ($scope) {
+        $scope.btnClickCallback=function (msg) {
+            alert("您现在显示的信息是："+msg);
+        }
+    })
+</script>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>Directive和ngRepeat</title>
+    <script src="components/angular/angular.min.js"></script>
+</head>
+<body ng-app="myApp" ng-controller="myCtrl">
+<div ng-repeat="person in people">
+    <p people-list info="person"></p>
+</div>
+</body>
+</html>
+<script>
+    var myApp=angular.module("myApp",[]);
+    myApp.directive("peopleList",function () {
+        return {
+            restrict:"A",
+            scope:{
+                info:"="
+            },
+            // replace : true,/*当有replace时候，template中只能有一个有一个根元素，否则会报错*/
+            template : "<p>姓名:{{info.name}}</p><p>性别:{{info.sex}}</p>"
+        }
+    });
+
+    myApp.controller("myCtrl",function ($scope) {
+        $scope.people=[
+            {
+            name:"Harry",
+            sex:"female"
+        },
+            {
+            name:"Tim",
+            sex:"male"
+        }
+        ]
+    })
+</script>

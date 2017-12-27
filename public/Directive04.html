@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>在Directive中修改控制器中的数据</title>
+    <script src="components/angular/angular.min.js"></script>
+</head>
+<body ng-app="myApp">
+<div  ng-controller="myCtrl1">
+    {{ people | json}}
+    <div ng-repeat="person in people">
+        <div people-list info="person"></div>
+    </div>
+</div>
+
+<div ng-controller="myCtrl2">
+{{another |json}}
+    <div ng-repeat="person in another">
+        <div another-list name="{{person.name}}" sex="{{person.sex}}"></div>
+    </div>
+</div>
+
+</body>
+</html>
+<script>
+    var myApp=angular.module("myApp",[]);
+    myApp.directive("peopleList",function () {
+        return {
+            restrict:"A",
+            scope:{
+                info:"="
+            },
+            // replace : true,/*当有replace时候，template中只能有一个有一个根元素，否则会报错*/
+            template: "<input type='text' ng-model='info.name'><p>性别：{{info.sex}}</p>"
+        }
+    });
+
+    myApp.controller("myCtrl1",function ($scope) {
+        $scope.people=[
+            {
+            name:"Harry",
+            sex:"female"
+        },
+            {
+            name:"Tim",
+            sex:"male"
+        }
+        ]
+    });
+
+    myApp.directive("anotherList",function () {
+        return {
+            restrict:"A",
+            scope:{
+                name:"@",
+                sex:"@"
+            },
+            template:"<input type='text' ng-model='name'><p>性别：{{sex}}</p>"
+        }
+    });
+
+    myApp.controller("myCtrl2",function ($scope) {
+        $scope.another=[
+            {
+                name:"Harry1",
+                sex:"female2"
+            },
+            {
+                name:"Tim3",
+                sex:"male4"
+            }
+        ];
+    })
+</script>
