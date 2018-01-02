@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ng-directive Example 02</title>
+    <script src="../../components/angular/angular.min.js"></script>
+</head>
+<body ng-app="myApp" ng-controller="YiMing">
+<runoob-directive></runoob-directive>
+<div class="runoob-directive"></div>
+<div runoob-directive></div>
+姓名: <input type="text" ng-model="name"/> <br/>
+<first/>
+<second/>
+
+</body>
+</html>
+<script>
+    var app=angular.module("myApp",[]);
+    app.directive("runoobDirective",function () {
+        return {
+            restrict:"EAC",
+            template:"<h1>自定义指令!</h1>"
+        }
+    });
+
+    app.directive("first",function () {
+        return {
+            restrict:"EA",
+            template:"first name :{{name}}"
+        }
+    }).directive("second",function () {
+        return{
+            scope:{},
+            controller:function ($scope) {
+                $scope.name="YiMing"
+            },
+            restrict:"AE",
+            template:"second name:{{name}}"
+        }
+    }).controller("YiMing",function ($scope) {
+        $scope.name="YiMing";
+    })
+</script>

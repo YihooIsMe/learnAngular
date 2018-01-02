@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>setInterval</title>
+    <script src="../../components/angular/angular.min.js"></script>
+</head>
+<body>
+<div ng-app="myApp" ng-controller="myCtrl">
+    <h1>{{content}}</h1>
+</div>
+</body>
+</html>
+<script>
+    var myApp=angular.module("myApp",[]);
+    myApp.controller("myCtrl",function ($scope) {
+        $scope.content=new Date().toLocaleTimeString();
+        $scope.setTime=function () {
+            $scope.$apply(function () {
+                $scope.content=new Date().toLocaleTimeString();
+            })
+        };
+        setInterval($scope.setTime,1000)
+    })
+</script>

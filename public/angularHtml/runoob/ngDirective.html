@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ng-directive Example 01</title>
+    <script src="../../components/angular/angular.min.js"></script>
+</head>
+<body>
+<div ng-app="" ng-init="firstName='John'">
+    <p>在输入框中尝试输入</p>
+    <p>姓名：<input type="text" ng-model="firstName"></p>
+    <p>你输入的为：{{firstName}}</p>
+
+    <div ng-init="names=['a','b','c','d','e']">
+        <ul>
+            <li ng-repeat="name in names">
+                {{name}}
+            </li>
+        </ul>
+    </div>
+
+    <div ng-init="countries=[
+    {name:'Jani',country:'Norway'},
+    {name:'Hege',country:'Sweden'},
+    {name:'Kai',country:'Denmark'}]">
+        <ol>
+            <li ng-repeat="city in countries">
+                {{city.name+" "+city.country}}
+            </li>
+        </ol>
+    </div>
+</div>
+</body>
+</html>

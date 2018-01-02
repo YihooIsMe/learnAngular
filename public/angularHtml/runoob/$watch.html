@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>$watch</title>
+    <script src="../../components/angular/angular.min.js"></script>
+</head>
+<body>
+<div ng-app="myApp" ng-controller="myCtrl">
+    <b>请输入姓名：</b><br>
+    <b>姓：</b><input type="text" ng-model="lastName"><br>
+    <b>名：</b><input type="text" ng-model="firstName"><br>
+    <h1>{{ lastName + " " + firstName }}</h1>
+    <h2>{{ fullName }}</h2>
+</div>
+</body>
+</html>
+<script>
+    var myApp=angular.module("myApp",[]);
+    myApp.controller("myCtrl",function ($scope) {
+        $scope.firstName="";
+        $scope.lastName="";
+
+        $scope.$watch("firstName",function (newVal) {
+            $scope.fullName=$scope.lastName+" "+$scope.firstName;
+        });
+
+        $scope.$watch("lastName",function (newVal) {
+            $scope.fullName=$scope.lastName+" "+$scope.firstName;
+        });
+    })
+</script>

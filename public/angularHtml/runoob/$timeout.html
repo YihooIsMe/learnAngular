@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>$timeout</title>
+    <script src="../../components/angular/angular.min.js"></script>
+</head>
+<body>
+<div ng-app="myApp" ng-controller="myCtrl">
+    <h1>{{content}}</h1>
+</div>
+</body>
+</html>
+<script>
+    var myApp=angular.module("myApp",[]);
+    myApp.controller("myCtrl",function ($scope, $timeout) {
+        $scope.content="两秒后我就改变了";
+        $timeout(function () {
+            $scope.content="How are you today ?";
+        },2000)
+    })
+</script>

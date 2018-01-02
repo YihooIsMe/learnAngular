@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义服务</title>
+    <script src="../../components/angular/angular.min.js"></script>
+</head>
+<body>
+<div ng-app="myApp" ng-controller="myCtrl">
+    <h1>{{content}}</h1>
+</div>
+</body>
+</html>
+<script>
+    var myApp=angular.module("myApp",[]);
+    myApp.service("custom",function () {
+        this.myFunc=function (val) {
+            return val.toString(16);
+        }
+    });
+
+    myApp.controller("myCtrl",function ($scope, custom) {
+        $scope.content=custom.myFunc(255);
+    })
+</script>

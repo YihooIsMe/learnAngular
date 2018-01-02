@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>单选框</title>
+    <script src="../../components/angular/angular.min.js"></script>
+</head>
+<body>
+<div ng-app="myApp" ng-controller="myCtrl">
+    <form action="">
+        <input name="myVal" type="radio" ng-model="val" value="dogs">Dogs<br/>
+        <input name="myVal" type="radio" ng-model="val" value="Cats">Cats<br/>
+        <input name="myVal" type="radio" ng-model="val" value="yihu">yihu<br/>
+        <input name="myVal" type="radio" ng-model="val" value="name">Name<br/>
+    </form>
+
+
+    <div ng-switch="val">
+        <div ng-switch-when="dogs">
+            <h1>Dogs</h1>
+            <p>Welcome dogs!</p>
+        </div>
+        <div ng-switch-when="Cats">
+            <h1>Cats</h1>
+            <p>Welcome cats!</p>
+        </div>
+        <div ng-switch-when="yihu">
+            <h1>yihu</h1>
+            <p>Welcome yihu!</p>
+        </div>
+        <div ng-switch-when="name">
+            <h1>name</h1>
+            <p>Welcome name!</p>
+        </div>
+    </div>
+
+    <select name="" id="" ng-model="otherVal">
+        <option value="one">one</option>
+        <option value="two">two</option>
+        <option value="three">three</option>
+        <option value="four">four</option>
+    </select>
+    <div ng-switch="otherVal">
+        <div ng-switch-when="one">
+            <h1>one</h1>
+            <p>This is one !</p>
+        </div>
+        <div ng-switch-when="two">
+            <h1>two</h1>
+            <p>This is two !</p>
+        </div>
+        <div ng-switch-when="three">
+            <h1>three</h1>
+            <p>This is three !</p>
+        </div>
+        <div ng-switch-when="four">
+            <h1>four</h1>
+            <p>This is four !</p>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<script>
+    var myApp=angular.module("myApp",[]);
+    myApp.controller("myCtrl",function () {
+
+    })
+</script>

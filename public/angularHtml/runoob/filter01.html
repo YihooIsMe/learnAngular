@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>filter 01</title>
+    <script src="../../components/angular/angular.min.js"></script>
+</head>
+<body>
+<div ng-app="myApp" ng-controller="myCtrl">
+    <div>
+        newString: {{"jj" | myfilter:1:2:3:5}}
+    </div>
+    <div>
+        {{formdate}}
+    </div>
+</div>
+</body>
+</html>
+<script>
+    var myApp=angular.module("myApp",[]);
+    myApp.controller("myCtrl",function ($scope,$filter) {
+        var day=new Date();
+        $scope.formdate=$filter('date')(day,'yyyy-MM-dd');
+    });
+    myApp.filter("myfilter",function () {
+        return function (text) {
+            console.log(arguments);
+            var newFilter=Array.prototype.slice.call(arguments);
+            return text+newFilter.join(",");
+        }
+    })
+</script>
