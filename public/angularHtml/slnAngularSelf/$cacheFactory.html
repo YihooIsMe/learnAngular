@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>$cacheFactory</title>
+    <script src="js/angular.min.js"></script>
+</head>
+<body ng-app="myApp">
+<div ng-controller="myCtrl">
+    <div>{{content}}</div>
+    <button ng-click="click_1()">设置键名缓存</button>
+    <button ng-click="click_2()">显示键值</button>
+    <button ng-click="click_3()">删除缓存</button>
+</div>
+</body>
+</html>
+<script>
+    var app=angular.module("myApp",[]);
+    app.controller("myCtrl",function ($scope, $cacheFactory) {
+        var cache=$cacheFactory("index");
+        $scope.click_1=function () {
+            cache.put("name","yihu");
+        };
+        $scope.click_2=function () {
+            $scope.content=cache.get("name");
+        };
+        $scope.click_3=function () {
+            cache.remove("name");
+        }
+    })
+</script>

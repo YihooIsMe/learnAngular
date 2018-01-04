@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ng-show ng-hide ng-switch</title>
+    <script src="js/angular.min.js"></script>
+    <style>
+        ul{
+            list-style: none;
+        }
+        *{
+            padding:0;
+        }
+    </style>
+</head>
+<body ng-app="myApp">
+<div ng-controller="myCtrl">
+    <div ng-show="{{a}}">yihu</div>
+    <div ng-hide="{{b}}">content</div>
+    <ul ng-switch on="{{switch}}">
+        <li ng-switch-when="1">dream</li>
+        <li ng-switch-when="2">never give up!</li>
+        <li ng-switch-when="3">more……</li>
+    </ul>
+</div>
+</body>
+</html>
+<script>
+    var app=angular.module("myApp",[]);
+    app.controller("myCtrl",function ($scope) {
+        $scope.a=true;
+        $scope.b=false;
+        $scope.switch=3;
+    })
+</script>

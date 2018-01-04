@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加自定义服务依赖项的方法</title>
+    <script src="js/angular.min.js"></script>
+</head>
+<body ng-app="myApp">
+<div ng-controller="myCtrl">
+    <div>我点击的信息是:<span>{{content}}</span></div>
+    <button ng-click="show('您真的要删除这条记录吗？')">click me!</button>
+</div>
+</body>
+</html>
+<script>
+    var app=angular.module("myApp",[]);
+    app.factory("$confirm",["$window",function ($win) {
+        return function (msg) {
+            return $win.confirm(msg)?"确定":"取消";
+        }
+    }]);
+    app.controller("myCtrl",function ($scope, $confirm) {
+        $scope.show=function (msg) {
+            $scope.content=$confirm(msg);
+        }
+    })
+</script>

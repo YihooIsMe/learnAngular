@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>cache</title>
+    <script src="../js/angular.min.js"></script>
+</head>
+<body ng-app="myApp">
+<div ng-controller="myCtrl">
+    <div>显示的结果为:{{result}}</div>
+    <div>缓存信息是:{{cache}}</div>
+</div>
+</body>
+</html>
+<script>
+    var app=angular.module("myApp",[]);
+    app.controller("myCtrl",function ($scope, $http, $cacheFactory) {
+        var cache=$cacheFactory.get("$http");
+        $http({
+            method:"get",
+            url:"cache.php",
+            cache:true
+        }).success(function (data) {
+            $scope.result=data;
+            var cacheValue=$cacheFactory.get("cache.php");
+            $scope.cache=cacheValue[0]+cacheValue[1];
+        })
+    })
+</script>

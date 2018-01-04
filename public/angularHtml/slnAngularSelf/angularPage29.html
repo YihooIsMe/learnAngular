@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>angular</title>
+    <script src="js/angular.min.js"></script>
+    <style>
+
+        .other{
+            font-weight: bold;
+            color:greenyellow;
+        }
+        .green{
+            color:red;
+        }
+    </style>
+</head>
+<body ng-app="myApp">
+<div ng-controller="myCtrl">
+    <span ng-class="{{other}}">content</span>
+    <span ng-class="{{green}}">content</span>
+    <div ng-class="{true:'other',false:'green'}[sel]">My name is yihu!</div>
+    <div ng-class="{other:a,'green':b}">learning angular</div>
+</div>
+</body>
+</html>
+<script>
+    var app=angular.module("myApp",[]);
+    app.controller("myCtrl",function ($scope) {
+        $scope.other="other";
+        $scope.green="green";
+        $scope.sel=false;
+        $scope.a=true;
+    })
+</script>

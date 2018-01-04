@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>angular</title>
+    <script src="js/angular.min.js"></script>
+    <style>
+        body {
+            font-size: 12px;
+        }
+
+        ul {
+            list-style-type: none;
+            width: 400px;
+            margin: 0px;
+            padding: 0px;
+        }
+
+        ul li {
+            float: left;
+            padding: 5px 0px;
+            cursor: pointer;
+        }
+
+        ul li span {
+            width: 50px;
+            float: left;
+            padding: 0px 10px;
+        }
+        .odd{
+            color:red;
+        }
+        .bold{
+            font-weight: bold;
+        }
+        .even{
+            color:greenyellow;
+        }
+        .focus{
+            background:#aaaaaa;
+        }
+    </style>
+</head>
+<body>
+<div ng-app="myApp">
+    <ul ng-controller="myCtrl">
+        <li ng-class="{{bold}}">
+            <span>序号</span>
+            <span>姓名</span>
+            <span>性别</span>
+            <span>是否首条</span>
+            <span>是否尾条</span>
+        </li>
+        <li ng-repeat="single in data" ng-class-odd="'odd'" ng-class-even="'even'" ng-click="click($index)" ng-class="{focus:$index==focus}">
+            <span>{{$index+1}}</span>
+            <span>{{single.name}}</span>
+            <span>{{single.age}}</span>
+            <span>{{$first?"是":"否"}}</span>
+            <span>{{$last?"是":"否"}}</span>
+        </li>
+    </ul>
+</div>
+</body>
+</html>
+<script>
+    var app = angular.module("myApp", []);
+    app.controller("myCtrl", function ($scope) {
+        $scope.bold='bold';
+        $scope.click=function (a) {
+            $scope.focus=a;
+        };
+        $scope.data = [
+            {name: '易虎', age: '男'},
+            {name: '张三', age: '男'},
+            {name: '梦想', age: '女'},
+            {name: '李四', age: '男'},
+            {name: '马清', age: '女'},
+            {name: '马楠', age: '女'}
+        ]
+    })
+</script>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>invoke</title>
+    <script src="js/angular.min.js"></script>
+</head>
+<body ng-app="myApp">
+<div ng-controller="myCtrl"></div>
+</body>
+</html>
+<script>
+    var app=angular.module("myApp",[]);
+    app.factory("$custom",function () {
+        return {
+            print:function (msg) {
+                console.log(msg);
+            }
+        }
+    });
+
+    var injector=angular.injector(["myApp","ng"]);
+    var func=function ($custom) {
+        $custom.print('函数执行成功！')
+    };
+    injector.invoke(func);
+    app.controller("myCtrl",function ($scope, $custom) {
+
+    })
+</script>

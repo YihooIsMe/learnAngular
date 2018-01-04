@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>angular</title>
+    <script src="js/angular.min.js"></script>
+</head>
+<body ng-controller="myCtrl">
+<div>以列表的方式绑定多项数据</div>
+<ul>
+    <li ng-repeat="stu in data">
+        <span>{{stu.name}}</span>
+        <span>{{stu.sex}}</span>
+        <span>{{stu.age}}</span>
+        <span>{{stu.score}}</span>
+    </li>
+</ul>
+</body>
+</html>
+<script>
+    var app=angular.module("myApp",[]);
+    app.controller("myCtrl",function ($scope) {
+        $scope.data=[
+            { name: "张明明", sex: "女", age: 24, score: 95 },
+            { name: "李清思", sex: "女", age: 27, score: 87 },
+            { name: "刘小华", sex: "男", age: 28, score: 86 },
+            { name: "陈忠忠", sex: "男", age: 23, score: 97 }
+        ];
+    })
+</script>

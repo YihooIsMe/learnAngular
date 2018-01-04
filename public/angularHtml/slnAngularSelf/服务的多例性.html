@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>服务的多例性</title>
+    <script src="js/angular.min.js"></script>
+</head>
+<body ng-app="myApp">
+<div ng-controller="myCtrl_1">
+    <div>编号:{{person.num}}</div>
+    <div>姓名:{{person.name}}</div>
+    <div>分数:{{person.score}}</div>
+    <button ng-click="reset()">重置</button>
+</div>
+<div ng-controller="myCtrl_2">
+    <div>编号:{{person.num}}</div>
+    <div>姓名:{{person.name}}</div>
+    <div>分数:{{person.score}}</div>
+</div>
+</body>
+</html>
+<script>
+    function message(json) {
+        angular.extend(this,json);
+        this.reset=function () {
+            this.num='021';
+            this.name='Duncan';
+            this.score="26850";
+        }
+    }
+
+    message.create=function () {
+        return new message({
+            num:'24',
+            name:'kobe',
+            score:'31201'
+        })
+    };
+    angular.module("myApp",[])
+        .factory('$student', function () {
+            return {
+                create: message.create
+            }
+        })
+        .controller("myCtrl_1",function ($scope,$student) {
+            $scope.person=$student.create();
+            $scope.reset=function () {
+                $scope.person.reset()
+            }
+        })
+
+        .controller("myCtrl_2",function ($scope,$student) {
+            $scope.person=$student.create()
+        })
+
+</script>

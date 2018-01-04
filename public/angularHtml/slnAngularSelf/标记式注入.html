@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>标记式注入</title>
+    <script src="js/angular.min.js"></script>
+    <style>
+        .box{
+            width: 300px;
+            border:1px solid black;
+        }
+    </style>
+</head>
+<body ng-app="myApp">
+<div ng-controller="myCtrl">
+    <div class="{{cln}}">{{content}}</div>
+    <button ng-click="alert('hello angular!')">弹出</button>
+    <button ng-click="show('我就是需要显示的内容')">内容显示</button>
+</div>
+</body>
+</html>
+<script>
+    var app=angular.module("myApp",[]);
+    app.factory('$alert',function ($window) {
+        return {
+            show:function (msg) {
+                $window.alert(msg);
+            }
+        }
+    });
+
+    app.factory('$show',function () {
+        return {
+            content:function (text) {
+                return text
+            }
+        }
+    });
+
+    var exp=function ($scope, $show, $alert) {
+        $scope.alert=function (content) {
+            $alert.show(content);
+        };
+
+        $scope.show=function (txt) {
+            $scope.cln='box';
+            $scope.content=$show.content(txt);
+        }
+    };
+
+    app.controller("myCtrl",exp)
+</script>

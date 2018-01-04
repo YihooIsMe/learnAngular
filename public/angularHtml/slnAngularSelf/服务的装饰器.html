@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>服务的装饰器</title>
+    <script src="js/angular.min.js"></script>
+</head>
+<body ng-app="myApp">
+<div ng-controller="myCtrl">
+    <div>姓名:{{stu.name}}</div>
+    <div>邮件:{{stu.email}}</div>
+    <div>主题:{{stu.title}}</div>
+</div>
+</body>
+</html>
+<script>
+    var app=angular.module("myApp",[])
+        .factory("$student",function () {
+            return {
+                name:'yihu',
+                email:"yihoo2016@sina.com"
+            }
+        })
+        .config(function ($provide) {
+            $provide.decorator("$student",function ($delegate) {
+                $delegate.title="hello,angular!";
+                return $delegate;
+            })
+        })
+        .controller("myCtrl",function ($scope, $student) {
+            console.log($student);
+            $scope.stu=$student;
+        })
+</script>

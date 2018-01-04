@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>hello angular</title>
+    <script src="js/angular.min.js"></script>
+</head>
+<body ng-controller="myCtrl">
+{{'hello,欢迎来到angular的世界'}}
+<br>
+    1.98+2.36={{1.98+2.36|number:0}}
+<br>
+<input type="text" ng-init="user.name='yihu'" ng-model="user.name" >
+<div>{{user.name}}</div>
+</body>
+</html>
+<script>
+    angular.module("myApp",[]).controller("myCtrl",function ($scope) {
+
+    })
+/*
+    function setName($scope) {
+        $scope.user={name:"yihu"}
+    }
+*/
+</script>

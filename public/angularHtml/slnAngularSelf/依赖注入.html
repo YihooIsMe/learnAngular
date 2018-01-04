@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>依赖注入</title>
+    <script src="js/angular.min.js"></script>
+    <style>
+        .box{
+            color:red;
+            border:1px solid black;
+            padding:5px 10px;
+        }
+    </style>
+</head>
+<body ng-app="myApp">
+<div ng-controller="myCtrl">
+    <div class="{{className}}">{{showContent}}</div>
+    <button ng-click="show()">click me!</button>
+</div>
+</body>
+</html>
+<script>
+    var app=angular.module("myApp",[]);
+    app.config(function ($controllerProvider) {
+        $controllerProvider.register('myCtrl',function ($scope) {
+            $scope.className='';
+            $scope.show=function () {
+                $scope.className='box';
+                $scope.showContent='这就是需要显示的内容';
+
+            }
+        })
+    })
+</script>

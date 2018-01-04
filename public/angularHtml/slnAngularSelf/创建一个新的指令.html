@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>创建一个新的指令</title>
+    <script src="js/angular.min.js"></script>
+</head>
+<body ng-app="myApp">
+<div>
+    <div class="cs-hello"></div>
+    <cs-hello></cs-hello>
+    <div data-cs-hello></div>
+    <div cs-hello></div>
+</div>
+</body>
+</html>
+<script>
+    var app = angular.module("myApp", []);
+    app.directive('csHello', function () {
+        return {
+            restrict: 'EAC',
+            replace:false,
+            template: "<h3>hello angular!</h3>"
+        }
+    })
+</script>

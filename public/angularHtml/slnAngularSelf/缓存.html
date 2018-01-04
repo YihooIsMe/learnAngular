@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>缓存</title>
+    <script src="js/angular.min.js"></script>
+</head>
+<body ng-app="myApp">
+<div ng-controller="myCtrl"></div>
+</body>
+</html>
+<script>
+    var app=angular.module("myApp",[]);
+    app.controller("myCtrl",function ($scope, $cacheFactory) {
+        var cache=$cacheFactory("test");
+        console.log(cache.info());
+        cache.put('c1','hello');
+        console.log(cache.put('c1','hello'));
+        console.log(cache.get('c1'));
+        console.log(cache.get('c2'));
+        cache.remove("c1");
+        console.log(cache.get('c1'));
+
+    })
+</script>

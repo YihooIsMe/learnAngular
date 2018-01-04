@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>作用域的层级</title>
+    <script src="js/angular.min.js"></script>
+    <style>
+        *{
+            padding:0;
+        }
+        body{
+            font-size:12px;
+        }
+        ul li{
+            display: table;
+        }
+        ul li span{
+            display: table-cell;
+            width: 60px;
+            height:30px;
+            text-align: center;
+            vertical-align: middle;
+        }
+        .header{
+            width: 300px;
+            text-align: right;
+        }
+        .dataLi{
+            background:#aaa;
+            color:white;
+        }
+    </style>
+</head>
+<body ng-app="myApp">
+<div ng-controller="myCtrl">
+    <div ng-controller="myCtrl_1">
+        <div ng-class="{{header}}">{{schoolName}}{{className1}}</div>
+        <ul>
+            <li>
+                <span>序号</span>
+                <span>姓名</span>
+                <span>性别</span>
+                <span>英语</span>
+                <span>数学</span>
+            </li>
+            <li ng-repeat="class1 in data1" ng-class="{{dataLi}}">
+                <span>{{$index+1}}</span>
+                <span>{{class1.name}}</span>
+                <span>{{class1.sex}}</span>
+                <span>{{class1.english}}</span>
+                <span>{{class1.maths}}</span>
+            </li>
+        </ul>
+    </div>
+    <div ng-controller="myCtrl_2">
+        <div ng-class="{{header}}">{{schoolName}}{{className2}}</div>
+        <ul>
+            <li>
+                <span>序号</span>
+                <span>姓名</span>
+                <span>性别</span>
+                <span>英语</span>
+                <span>数学</span>
+            </li>
+            <li ng-repeat="class2 in data2" ng-class="{{dataLi}}">
+                <span>{{$index+1}}</span>
+                <span>{{class2.name}}</span>
+                <span>{{class2.sex}}</span>
+                <span>{{class2.english}}</span>
+                <span>{{class2.maths}}</span>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>
+<script>
+    var app=angular.module("myApp",[]);
+    app.controller("myCtrl",function ($scope) {
+        $scope.schoolName='北城区实验小学';
+        $scope.header='header';
+        $scope.dataLi='dataLi';
+    });
+    app.controller("myCtrl_1",function ($scope) {
+        $scope.className1='三年级(1)班';
+        $scope.data1=[
+            { name: "张明明", sex: "女", english: 85, maths: 95 },
+            { name: "李清思", sex: "女", english: 97, maths: 87 }
+        ]
+    });
+    app.controller("myCtrl_2",function ($scope) {
+        $scope.className2='三年级(2)班';
+        $scope.data2=[
+            { name: "刘小华", sex: "男", english: 97, maths: 86 },
+            { name: "陈忠忠", sex: "男", english: 87, maths: 88 }
+        ]
+    })
+</script>

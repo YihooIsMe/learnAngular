@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>内置服务调用</title>
+    <script src="js/angular.min.js"></script>
+    <style>
+        body{
+            font-size: 12px;
+        }
+        .showA{
+            background:#ccc;
+            padding:5px 10px;
+            width: 300px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body ng-app="myApp">
+<div ng-controller="myCtrl">
+    <div class="showA">当前的地址是:{{address}}</div>
+    <button ng-click="show()">显示地址</button>
+</div>
+</body>
+</html>
+<script>
+    var app=angular.module("myApp",[]);
+    app.controller("myCtrl",function ($scope, $location) {
+        $scope.show=function () {
+            $scope.address=$location.absUrl();
+        }
+    })
+</script>

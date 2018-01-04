@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Filter3</title>
+    <script src="js/angular.min.js"></script>
+    <style>
+        *{
+            padding:0;
+        }
+        body{
+            font-family: arial,sans-serif;
+            font-size:15px;
+        }
+        ul li span{
+            display: inline-block;
+            width: 60px;
+            height:30px;
+            text-align: center;
+        }
+        .bold{
+            font-weight: bold;
+        }
+        .even{
+            color:red;
+        }
+        .odd{
+            color:blue;
+        }
+    </style>
+</head>
+<body ng-app="myApp">
+<div ng-controller="myCtrl">
+    <ul>
+        <li ng-class="bold">
+            <span>序号</span>
+            <span>姓名</span>
+            <span>性别</span>
+            <span>年龄</span>
+            <span>分数</span>
+        </li>
+        <li ng-repeat="person in data|young:1" ng-class-even="'even'" ng-class-odd="'odd'">
+            <span>{{$index+1}}</span>
+            <span>{{person.name}}</span>
+            <span>{{person.sex}}</span>
+            <span>{{person.age}}</span>
+            <span>{{person.score}}</span>
+        </li>
+    </ul>
+</div>
+</body>
+</html>
+<script>
+    var app=angular.module("myApp",[]);
+    app.controller("myCtrl",function ($scope) {
+        $scope.bold='bold';
+        $scope.data=[
+            {name:'张明明',sex:'男',age:'20',score:'85'},
+            {name:'李四',sex:'男',age:'25',score:'95'},
+            {name:'易虎',sex:'男',age:'26',score:'80'},
+            {name:'马清',sex:'女',age:'27',score:'88'},
+            {name:'龙海仁',sex:'男',age:'18',score:'97'},
+            {name:'吴曦',sex:'女',age:'25',score:'93'},
+            {name:'郑超群',sex:'男',age:'26',score:'99'},
+            {name:'孟璐',sex:'女',age:'25',score:'86'}
+        ]
+    });
+
+    app.filter('young',function () {
+        return function (e, type) {
+            var out=[],
+                i,
+                type=type?"男":"女",
+                len;
+            for(i=0,len=e.length;i<len;i++){
+                if(e[i].age>22&&e[i].age<28&&type==e[i].sex){
+                    out.push(e[i]);
+                }
+            }
+
+            return out;
+        }
+    })
+</script>

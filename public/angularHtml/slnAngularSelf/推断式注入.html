@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>推断式注入</title>
+    <script src="js/angular.min.js"></script>
+</head>
+<body ng-app="myApp">
+<div ng-controller="myCtrl">
+    <button ng-click="click('hello world!')">弹出对话框</button>
+</div>
+</body>
+</html>
+<script>
+    var app=angular.module("myApp",[]);
+    app.config(function ($provide) {
+        $provide.factory("$show",function ($window) {
+            return {
+                show:function (msg) {
+                    $window.alert(msg);
+                }
+            }
+        });
+    });
+
+/*    app.factory("$show",function ($window) {
+        return {
+            show:function (msg) {
+                $window.alert(msg);
+            }
+        }
+    });*/
+
+    var func=function ($scope,$show) {
+        $scope.click=function (con) {
+            $show.show(con);
+        }
+    };
+
+    app.controller("myCtrl",func);
+</script>

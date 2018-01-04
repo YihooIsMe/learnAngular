@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>设置指令对象中的compile属性</title>
+    <script src="js/angular.min.js"></script>
+</head>
+<body ng-app="myApp">
+<div ng-controller="myCtrl">
+    <ts-Parent>
+        <ts-Son>
+            {{tip}}
+        </ts-Son>
+    </ts-Parent>
+</div>
+</body>
+</html>
+<script>
+    var app=angular.module("myApp",[])
+        .controller("myCtrl",function ($scope) {
+            $scope.tip='跟踪compile执行过程'
+        })
+        .directive("tsParent",function () {
+            return {
+                restrict:"ECA",
+                compile:function (iEle, iAttrs, trans) {
+                    console.log('正在编译A指令');
+                    return {
+                        pre:function (scope, iEle, iAttrs) {
+                            console.log('正在执行A指令中pre函数')
+                        },
+                        post:function (scope, iEle, iAttrs) {
+                            console.log('正在执行A指令中post函数')
+                        }
+                    }
+                }
+            }
+        })
+        .directive("tsSon",function () {
+            return {
+                restrict:"ECA",
+                compile:function (iEle, iAttrs, trans) {
+                    console.log('正在编译B指令');
+                    return {
+                        pre:function (scope, iEle, iAttrs) {
+                            console.log('正在执行B指令中pre函数')
+                        },
+                        post:function (scope, iEle, iAttrs) {
+                            console.log('正在执行B指令中post函数')
+                        }
+                    }
+                }
+            }
+        })
+</script>

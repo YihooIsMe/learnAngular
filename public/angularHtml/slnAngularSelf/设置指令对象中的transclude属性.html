@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>设置指令对象中的transclude属性</title>
+    <script src="js/angular.min.js"></script>
+</head>
+<body ng-app="myApp">
+<script type="text/ng-template" id="transclude">
+    <div id="iframe">
+        <input type="text" ng-model="text">
+        <div ng-transclude></div>
+    </div>
+</script>
+<ts-Trans><div>要显示的数字是:</div>{{text}}</ts-Trans>
+</body>
+</html>
+<script>
+    var app=angular.module("myApp",[]);
+    app.directive("tsTrans",function () {
+        return {
+            restrict:"EAC",
+            templateUrl:"transclude",
+            transclude:true
+        }
+    })
+</script>

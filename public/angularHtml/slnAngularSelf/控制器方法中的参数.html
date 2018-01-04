@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>控制器方法中的参数</title>
+    <script src="js/angular.min.js"></script>
+    <style>
+        input {
+            width: 60px;
+        }
+
+        .box1 {
+            width: 300px;
+            background: #aaaaaa;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .type {
+            display: inline-block;
+            width: 30px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body ng-app="myApp">
+<div ng-controller="myCtrl">
+    <div class="box1">
+        <input type="text" ng-model="a">
+        <span class="type">{{type}}</span>
+        <input type="text" ng-model="b">
+        <span>=</span><span>{{result}}</span>
+    </div>
+    <div>
+        <button ng-click="change(1)">加法</button>
+        <button ng-click="change(0)">乘法</button>
+    </div>
+</div>
+</body>
+</html>
+<script>
+    var app = angular.module("myApp", []);
+    app.controller("myCtrl", function ($scope) {
+        $scope.type = "+";
+        $scope.change = function (arg) {
+            if (arg) {
+                $scope.type = "+";
+                $scope.result = parseFloat($scope.a) + parseFloat($scope.b);
+            } else {
+                $scope.type = "*";
+                $scope.result = parseFloat($scope.a) * parseFloat($scope.b);
+            }
+        }
+    })
+</script>

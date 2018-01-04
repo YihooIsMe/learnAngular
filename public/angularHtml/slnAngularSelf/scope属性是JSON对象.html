@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>scope属性是JSON对象</title>
+    <script src="js/angular.min.js"></script>
+</head>
+<body ng-controller="myCtrl">
+<script type="text/ng-template" id="ngTemp">
+<div>
+    <span>姓名:{{textName}}</span>
+    <span>年龄:{{textAge}}</span>
+    <br>
+    <button ng-transclude></button>
+</div>
+</script>
+<div id="frame">
+    姓名：<input type="text" placeholder="请输入姓名" ng-model="text_name"><br>
+    年龄：<input type="text" placeholder="请输入年龄" ng-model="text_age">
+    <div>{{tip}}</div>
+    <ts-Trans a-attr="{{text_name}}" b-attr="text_age" reset="reSet()">重置</ts-Trans>
+</div>
+</body>
+</html>
+<script>
+    var app=angular.module("myApp",[])
+        .controller("myCtrl",function ($scope) {
+            $scope.reSet=function () {
+                $scope.tip="姓名与年龄重置成功！";
+            }
+        })
+        .directive("tsTrans",function () {
+            return {
+                restrict:"ECA",
+                templateUrl:"ngTemp",
+                transclude:true,
+                scope:{
+                    textName:"@aAttr",
+                    textAge:"=bAttr",
+                    reSet:"&reset"
+                },
+                link:function (scope,iEle,iAttrs) {
+                    iEle.bind("click",function () {
+                        scope.$apply(function () {
+                            scope.reSet();
+                            scope.textName="Hoo Ye";
+                            scope.textAge="20";
+                        })
+                    })
+                }
+            }
+        })
+</script>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>作用域事件的传播</title>
+    <script src="js/angular.min.js"></script>
+</head>
+<body ng-app="myApp">
+<div ng-controller="parentCtrl">
+    <div ng-controller="Ctrl">
+        <button ng-click="toParent()">向父级传播</button>
+        <button ng-click="toSon()">向子集传播</button>
+        <div ng-controller="c3_9_c"></div>
+    </div>
+    <div ng-controller="c3_9_b"></div>
+</div>
+<!--TODO:angular1.4.4实现此功能时，出现问题~-->
+</body>
+</html>
+<script>
+    var app=angular.module("myApp",[]);
+    app.controller("parentCtrl",function ($scope) {
+        $scope.toParent=function () {
+            $scope.$emit('event1','事件来源于子集！');
+        };
+        $scope.toSon=function () {
+            $scope.$broadcast('event2','事件来源于父级！')
+        }
+    });
+
+    app.controller("parentCtrl",function ($scope) {
+        $scope.$on('event1',function (event, data) {
+            console.log('在父级中监听到', data);
+        });
+        $scope.$on('event2',function (event, data) {
+            console.log('在父级中监听到', data);
+        })
+    });
+
+    app.controller('c3_9_c', function ($scope) {
+        $scope.$on('event_1', function (event, data) {
+            console.log('在子级中监听到', data);
+        });
+        $scope.$on('event_2', function (event, data) {
+            console.log('在子级中监听到', data);
+        });
+    });
+
+    app.controller('c3_9_b', function ($scope) {
+        $scope.$on('event_1', function (event, data) {
+            console.log('在同级中监听到', data);
+        });
+        $scope.$on('event_2', function (event, data) {
+            console.log('在同级中监听到', data);
+        });
+    });
+</script>

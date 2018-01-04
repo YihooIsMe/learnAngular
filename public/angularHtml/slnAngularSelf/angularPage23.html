@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>angular</title>
+    <script src="js/angular.min.js"></script>
+</head>
+<body ng-app="myApp">
+    <div ng-controller="myParent">
+        <div ng-controller="myCtrl">
+            <span>{{text}}</span>
+            <br>
+            <span>{{child}}</span>
+            <button ng-click="show()">继承</button>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    var app=angular.module("myApp",[]);
+    app.controller("myParent",['$scope',function ($scope) {
+        $scope.text='Hello Angular!';
+        $scope.show=function () {
+            $scope.text='我是父级添加的方法~';
+        }
+    }])
+
+    app.controller("myCtrl",['$scope',function ($scope) {
+        $scope.child='欢迎来到Angular的精彩世界！';
+    }])
+</script>

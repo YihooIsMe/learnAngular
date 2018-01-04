@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>一个使用require和controller属性的示例</title>
+    <script src="js/angular.min.js"></script>
+</head>
+<body ng-app="myApp">
+<div>
+    <ts-parent>
+        <span>{{pInfo}}</span>
+        <br>
+        <ts-son>
+            <span>{{sInfo}}</span>
+        </ts-son>
+        <br>
+        <button ng-click="change()">换位</button>
+    </ts-parent>
+</div>
+</body>
+</html>
+<script>
+    var app = angular.module("myApp", [])
+        .directive("tsParent", function () {
+            return {
+                restrict: "EAC",
+                controller: function ($scope) {
+                    $scope.pInfo = "今天天气不错！";
+                    this.addChild = function (c) {
+                        $scope.change = function () {
+                            $scope.temp=$scope.pInfo;
+                            $scope.pInfo=c.sInfo;
+                            c.sInfo=$scope.temp;
+                        }
+                    }
+                }
+            }
+        })
+        .directive("tsSon", function () {
+            return {
+                restrict: "EAC",
+                require: "^?tsParent",
+                link: function (scope, iEle, iAttrs, ctrl) {
+                    scope.sInfo = "气温正好18摄氏度。";
+                    ctrl.addChild(scope)
+                }
+            }
+        })
+</script>

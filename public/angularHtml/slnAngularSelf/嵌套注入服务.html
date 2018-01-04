@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>嵌套注入服务</title>
+    <script src="js/angular.min.js"></script>
+</head>
+<body ng-app="myApp">
+<div ng-controller="c6_7">
+    <button ng-click="ask(false,'您输入的内容不正确！')">
+        提示框
+    </button>
+    <button ng-click="ask(true,'你真的要删除这条记录吗？')">
+        询问框
+    </button>
+</div>
+</body>
+</html>
+<script>
+    var app=angular.module("myApp",[])
+        .factory('$alert',['$window',function ($win) {
+            return function (msg) {
+                $win.confirm(msg);
+            }
+        }])
+        .service("$select",["$window","$alert",function ($win,$alt) {
+            return function (t,msg) {
+                return t?$alt(msg):$win.alert(msg);
+            }
+        }])
+        .controller("c6_7",function ($scope,$alert,$select) {
+            $scope.ask=function (t, msg) {
+               $select(t,msg);
+            }
+        })
+</script>

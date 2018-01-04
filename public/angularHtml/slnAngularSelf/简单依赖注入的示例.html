@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>简单依赖注入的示例</title>
+    <script src="js/angular.min.js"></script>
+    <style>
+        .box{
+            border:1px solid black;
+            padding:5px 10px;
+            width: 300px;
+            margin-bottom:20px;
+        }
+    </style>
+</head>
+<body ng-app="myApp">
+<div ng-controller="myCtrl">
+    <div class="{{show}}">{{content}}</div>
+    <button ng-click="showContent(1)">早上</button>
+    <button ng-click="showContent(2)">上午</button>
+    <button ng-click="showContent(3)">下午</button>
+    <button ng-click="showContent(4)">晚上</button>
+</div>
+</body>
+</html>
+<script>
+    var app=angular.module("myApp",[]);
+    app.config(function ($provide) {
+        $provide.provider('show_1',function () {
+            this.$get=function () {
+                return {
+                    val:function (name) {
+                        return name;
+                    }
+                }
+            }
+        })
+    });
+
+    app.config(function ($provide) {
+        $provide.factory('show_2',function () {
+            return {
+                val:function (name) {
+                    return name;
+                }
+            }
+        })
+    });
+
+    app.config(function ($provide) {
+        $provide.service('show_3',function () {
+            return {
+                val:function (name) {
+                    return name;
+                }
+            }
+        })
+    });
+
+    app.config(function ($provide) {
+        $provide.value('show_4',function (name) {
+            return name;
+        })
+    });
+
+    app.controller("myCtrl",function ($scope, show_1, show_2, show_3, show_4) {
+        console.log(show_1);
+        console.log(show_2);
+        console.log(show_3);
+        console.log(show_4);
+        $scope.show='';
+        $scope.showContent=function (t) {
+            $scope.show='box';
+            switch (t){
+                case 1:
+                    console.log(show_1);
+                    $scope.content=show_1.val("早上好！");
+                    break;
+                case 2:
+                    console.log(show_2)
+                    $scope.content=show_2.val("上午好！");
+                    break;
+                case 3:
+                    console.log(show_3)
+                    $scope.content=show_3.val("下午好！");
+                    break;
+                case 4:
+                    console.log(show_4)
+                    $scope.content=show_4("晚上好！");
+                    break;
+            }
+        }
+    })
+</script>

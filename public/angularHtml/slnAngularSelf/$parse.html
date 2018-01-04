@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>angular</title>
+    <script src="js/angular.min.js"></script>
+</head>
+<body ng-app="myApp">
+<div ng-controller="myCtrl">
+    <h1>{{ParsedValue}}</h1>
+</div>
+<script>
+    var app = angular.module("myApp", []);
+    app.controller("myCtrl", function ($scope,$parse) {
+        var context = {
+            name: "dreamapple",
+            age:1
+        };
+        // 因为这个解析的语句中含有我们想要解析的表达式，
+        // 所以要把不相关的用引号引起来，整体然后用+连接
+        var expression = "hello";
+        var parseFunc = $parse(expression);
+        console.log(parseFunc.literal);
+        console.log(parseFunc.constant);
+        console.log("assign:"+parseFunc.assign);
+        console.log(parseFunc());
+        console.log(parseFunc);
+        $scope.ParsedValue = parseFunc(context);
+    })
+</script>
+</body>
+</html>

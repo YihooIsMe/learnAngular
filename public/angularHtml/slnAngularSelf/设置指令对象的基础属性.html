@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>设置指令对象的基础属性</title>
+    <script src="js/angular.min.js"></script>
+</head>
+<body ng-app="myApp">
+<div>
+<ts-Data></ts-Data>
+<ts-Data1></ts-Data1>
+<ts-Data2></ts-Data2>
+</div>
+</body>
+</html>
+<script type="text/ng-template" id="ngSc">
+<h3>数据来源于script！</h3>
+</script>
+<script>
+    var app=angular.module("myApp",[]);
+    app.run(function ($templateCache) {
+        $templateCache.put("cache","<h3>数据来源于缓存！</h3>")
+    });
+    app.directive("tsData",function () {
+        return {
+            restrict:"EAC",
+            templateUrl:'tsData.html'
+
+        }
+    });
+    app.directive("tsData1",function () {
+        return {
+            restrict:"EAC",
+            templateUrl:"ngSc"
+        }
+    });
+    app.directive("tsData2",function () {
+        return {
+            restrict:"EAC",
+            templateUrl:"cache"
+        }
+    })
+</script>

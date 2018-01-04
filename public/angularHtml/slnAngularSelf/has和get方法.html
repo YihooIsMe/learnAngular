@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>has和get方法</title>
+    <script src="js/angular.min.js"></script>
+</head>
+<body ng-app="myApp">
+<div ng-controller="myCtrl"></div>
+</body>
+</html>
+<script>
+    var app=angular.module("myApp",[]);
+    app.factory("$custom",function () {
+        return {
+            print:function (msg) {
+               console.log(msg);
+            }
+        }
+    });
+
+    var injector=angular.injector(["myApp","ng"]);
+    var has=injector.has("$custom");
+    console.log(has);
+
+    if(has){
+        var custom=injector.get("$custom");
+        custom.print("控制台输出任意的内容！");
+    }
+
+    app.controller("myCtrl",function ($scope, $custom) {
+
+    })
+</script>

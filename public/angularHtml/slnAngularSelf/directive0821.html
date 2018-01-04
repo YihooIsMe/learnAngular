@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>directive</title>
+    <script src="js/angular.min.js"></script>
+</head>
+<body ng-app="myApp" ng-controller="myCtrl">
+<zl1-a class></zl1-a>
+<div>{{name}}</div>
+</body>
+</html>
+<script>
+    var app=angular.module('myApp',[])
+        .directive("zl1A",function () {
+            return {
+                restrict:"EA",
+                template:"thirective",
+                link:function ($scope, elem, attr, controller) {
+                    console.log("$scope :"+$scope+"\n"+"elem :"+elem+"\n"+"attr :"+attr+"\n"+"controller :"+controller);
+                    console.log($scope);
+                    console.log(elem);
+                    console.log(attr);
+                    console.log(controller);
+                    console.log("这是link")
+                },
+                controller:function ($scope, $element, $attrs) {
+                    console.log("这是con");
+                    console.log($scope);
+                    console.log($element);
+                    console.log($attrs);
+                }
+            }
+        });
+        app.controller("myCtrl",function ($scope) {
+            $scope.name="yihoo";
+        })
+</script>

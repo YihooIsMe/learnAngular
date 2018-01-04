@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>scope属性的布尔值</title>
+    <script src="js/angular.min.js"></script>
+</head>
+<body ng-app="myApp">
+<script type="text/ng-template" id="ngTpt">
+    <div>{{message}}</div>
+    <button ng-transclude></button>
+</script>
+<div id="frame">
+    <input type="text" ng-model="message">
+    <my-Element>固定</my-Element>
+</div>
+</body>
+</html>
+<script>
+    var app=angular.module("myApp",[])
+        .directive("myElement",function () {
+            return {
+                restrict:"EAC",
+                templateUrl:"ngTpt",
+                transclude:true,
+                scope:true,
+                link:function (scope, iEle, iAttrs) {
+                    console.log(iEle);
+                    iEle.bind("click",function () {
+                        scope.$apply(function () {
+                            scope.message="这个就是我想显示的内容！"
+                        })
+                    })
+                }
+            }
+        })
+</script>

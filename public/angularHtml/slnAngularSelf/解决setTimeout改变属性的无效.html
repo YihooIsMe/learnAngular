@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>解决setTimeout改变属性的无效</title>
+    <script src="js/angular.min.js"></script>
+</head>
+<body ng-app="myApp">
+<div ng-controller="myCtrl">
+    <p>{{tip}}</p>
+</div>
+</body>
+</html>
+<script>
+    var app=angular.module("myApp",[])
+        .controller("myCtrl",function ($scope,$timeout) {
+            $scope.tip="angular!";
+            //第一种正确的写法
+            /*setTimeout(function () {
+                $scope.$apply(function () {
+                    $scope.tip="欢迎来到angular的世界！"
+                })
+            },2000);*/
+
+            //第二种正确的写法
+            $timeout(function () {
+                $scope.tip="欢迎来到angular的世界!";
+            },3000);
+
+            //错误的写法
+            /*setTimeout(function () {
+                $scope.tip="欢迎来到angular的世界！";
+            },1000);*/
+        })
+</script>

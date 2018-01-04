@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>调用element方法控制DOM元素</title>
+    <script src="js/angular.min.js"></script>
+</head>
+<body ng-app="myApp">
+<div ng-controller="myCtrl" id="content">
+    <button ng-click="add()">添加元素</button>
+    <button ng-click="del()">删除元素</button>
+</div>
+</body>
+</html>
+<script>
+    var app=angular.module("myApp",[]);
+        app.controller("myCtrl",function ($scope,$compile) {
+            $scope.content="hello angular!";
+            $scope.log=function () {
+                console.log("这个是我动态加载出来的！")
+            };
+            var html="<div ng-click='log()'>{{content}}</div>";
+            var newHtml=angular.element(html);
+            var $dom=$compile(newHtml)($scope);
+            $scope.add=function () {
+//                $dom.appendTo(angular.element(document.getElementById("content")))
+                angular.element(document.getElementById("content")).append($dom);
+            };
+            $scope.del=function () {
+                $dom.remove();
+            };
+        })
+</script>

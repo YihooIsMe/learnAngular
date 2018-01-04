@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>解决点击按钮事件中的冒泡现象</title>
+    <script src="js/angular.min.js"></script>
+</head>
+<body>
+<div ng-app="myApp" ng-controller="myCtrl as o">
+    <div ng-click="o.click('父级',$event)">
+        <input type="checkbox" ng-click="o.change($event)"  ng-model="o.test">是否阻止冒泡？
+        <br>
+        <button ng-click="o.click('按钮',$event)">点击我</button>
+    </div>
+</div>
+</body>
+</html>
+<script>
+    var app=angular.module("myApp",[])
+        .controller("myCtrl",function ($scope) {
+            var that=this;
+            that.click=function (name, $event) {
+                console.log(name+"触发");
+                if(that.test){
+                    $event.stopPropagation()
+                }
+            };
+
+            that.change=function ($event) {
+                $event.stopPropagation();
+            }
+        })
+</script>

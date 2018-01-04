@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>使用constant和value方法自定义服务</title>
+    <script src="js/angular.min.js"></script>
+    <style>
+        .box>div{
+            width: 250px;
+            background:#dddddd;
+            padding:5px 10px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body ng-app="myApp">
+<div ng-controller="myCtrl" class="box">
+    <div>{{content1}}</div>
+    <div>{{content2}}</div>
+</div>
+</body>
+</html>
+<script>
+    var app=angular.module("myApp",[])
+        .constant("a",{
+            book:"My dream!"
+        })
+        .value('b',{
+            usd:'35.8'
+        })
+        .controller("myCtrl",function ($scope, a, b) {
+            var n=600;
+            angular.extend(b,{usd:n});
+            $scope.content1=a.book;
+            $scope.content2=b.usd;
+        })
+</script>
